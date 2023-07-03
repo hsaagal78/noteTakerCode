@@ -1,5 +1,5 @@
 const express = require('express');
-// const Note = require('./models/Note');
+const Note = require('./lib/Note');
 const path = require ('path')
 
 const app = express();
@@ -13,20 +13,20 @@ app.get('/public/css/style.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css');
     res.sendFile(path.join(__dirname, 'public', 'css', 'jass.css',));
   });
-// app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
-// // Load Routes
+// Load Routes
 
-// // Post route to retrieve the form data
-// app.post('/notes', (clientReq, serverRes) => {
+// Post route to retrieve the form data
+app.post('/notes', (clientReq, serverRes) => {
 
-//   const newNote = new Note(clientReq.body.note);
+  const newNote = new Note(clientReq.body.note);
 
-//   newNote.save();
+  newNote.save();
 
-//   // Respond back to the client to complete the request
-//   serverRes.redirect('/');
-// });
+  // Respond back to the client to complete the request
+  serverRes.redirect('/');
+});
 
 app.listen(3333, () => console.log('Server started on port 3333.'));
 

@@ -21,6 +21,7 @@
   "homepage": "https://github.com/hsaagal78/noteTakerCode#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "inquirer": "^8.2.5"
+    "inquirer": "^8.2.5",
+    "uuid": "^9.0.0"
   }
 }
