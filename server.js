@@ -2,6 +2,7 @@ const express = require('express');
 const { Note,getNotes } = require('./lib/Note');
 const path = require ('path')
 
+
 const app = express();
 
 app.use(express.static('./public'));
@@ -32,6 +33,16 @@ app.get('/notes',(clientReq,serverRes) => {
   const notes = getNotes();
 
   serverRes.send(notes);
+});
+
+app.delete('/notes/:id', (clientReq, serverRes) => {
+  
+  // console.log(clientReq.params.id);
+  const noteId = clientReq.params.id;
+  const note = new Note();
+  note.noteDelete(noteId)
+  serverRes.send({ message: 'Note deleted successfully!' });
+  
 });
 
 app.listen(3333, () => console.log('Server started on port 3333.'));
