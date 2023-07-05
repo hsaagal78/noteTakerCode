@@ -44,6 +44,16 @@ app.delete('/notes/:id', (clientReq, serverRes) => {
   serverRes.send({ message: 'Note deleted successfully!' });
   
 });
+app.put('/notes/:id', (clientReq, serverRes) => {
+  const noteId = clientReq.params.id;
+  const updatedText = clientReq.body.text;
+  console.log('app',updatedText);
+  debugger;
+  const note = new Note();
+  note.updateNote();
+  serverRes.send({ message: 'Note updated successfully!' });
+});
+
 
 app.listen(3333, () => console.log('Server started on port 3333.'));
 
