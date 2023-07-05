@@ -27,15 +27,17 @@ const container = document.querySelector('.contain');
 container.addEventListener('click', (event) => {
     if (event.target.classList.contains('modal_btn')) {
         const noteId = event.target.getAttribute('data-note-id');
-        console.log(noteId);
+        const deletedNote = document.querySelector(`[data-note-id="${noteId}"]`);
+        deletedNote.parentNode.remove();
         handleDeleteNote(noteId);
+        
     }
 });
 
 
 function handleDeleteNote(noteId) {
     
-    console.log(noteId);
+    console.log('aqui:',noteId);
 
   fetch(`/notes/${noteId}`, {
     method: 'DELETE'
@@ -44,8 +46,6 @@ function handleDeleteNote(noteId) {
     .then(data => {
       console.log('Note deleted successfully:', data.message);
 
-      const deletedNote = document.querySelector(`[data-note-id="${noteId}"]`);
-      deletedNote.parentNode.remove();
       outputNotes();
     })
     .catch(err => {

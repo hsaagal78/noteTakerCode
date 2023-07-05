@@ -37,7 +37,7 @@ app.get('/notes',(clientReq,serverRes) => {
 
 app.delete('/notes/:id', (clientReq, serverRes) => {
   
-  // console.log(clientReq.params.id);
+ 
   const noteId = clientReq.params.id;
   const note = new Note();
   note.noteDelete(noteId)
