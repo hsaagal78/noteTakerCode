@@ -48,9 +48,10 @@ app.put('/notes/:id', (clientReq, serverRes) => {
   const noteId = clientReq.params.id;
   const updatedText = clientReq.body.text;
   console.log('app',updatedText);
-  debugger;
+  
   const note = new Note();
-  note.updateNote();
+  note.id = noteId;
+  note.updateNote(updatedText,noteId);
   serverRes.send({ message: 'Note updated successfully!' });
 });
 

@@ -13,7 +13,7 @@ function outputNotes() {
               <button class="modal_btn" data-note-id="${noteObj.id}">&times;</button>
               <h3 class="modal_body">${noteObj.text}</h3>
               <h3 class="modal_id">${noteObj.id}</h3>
-              <button class="modalM_btn" data-update-id="${noteObj.id}">&#9998;</button>
+              <button class="modalM_btn" data-update-id="${noteObj.id}" data-modal-update-body='${noteObj.text}'>&#9998;</button>
             </div>
           </div>
         `);
@@ -37,7 +37,7 @@ const updateNoteContainer = document.querySelector('.updateNote');
 updateNoteContainer.addEventListener('click', (event) => {
   if (event.target.classList.contains('modalM_btn')) {
     const noteId = event.target.getAttribute('data-update-id');
-    console.log(noteId);
+    
     handleUpdateNote(noteId);
   }
 });
@@ -57,31 +57,37 @@ function handleDeleteNote(noteId) {
 }
 
 function handleUpdateNote(noteId) {
-//   console.log('HELLO');
-    const noteToUpdate = document.querySelector(`[data-update-id="${noteId}"]`);
-    // console.log('update',noteToUpdate);
-    // debugger;
-    const currentText = noteToUpdate.querySelector('.modal_body').textContent;
-    debugger;
- console.log(currentText);
+  const noteToUpdate = document.querySelector(`[data-update-id="${noteId}"]`);
+  const newnoteToUpdate = noteToUpdate.querySelector('.modal_body');
+  const currentText = noteToUpdate.dataset.modalUpdateBody;
 
   const newText = window.prompt('Enter the new note text:', currentText);
-
+ 
   if (newText) {
-    fetch(`/notes/${noteId}`, {
+    
+      fetch(`/notes/${noteId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ text: newText })
+      body: JSON.stringify({ text:newText })
     })
       .then(res => res.json())
       .then(data => {
         console.log('Note updated successfully:', data.message);
-        noteToUpdate.querySelector('.modal_body').innerText = newText;
+        newnoteToUpdate.innerText = newText;
+        outputNotes();
       })
       .catch(err => {
         console.error('Error updating note:', err);
       });
   }
 }
+
+
+
+
+
+
+
+
