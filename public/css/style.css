@@ -86,4 +86,25 @@
   left: 10px;
   width: 100px;
   padding: 10px;
+  
+}
+
+#body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 50px;
+  padding: 30px;
+  border: 1px solid black;
+}
+#body h1{
+  padding: 20px;
+  
+}
+#body a{
+  padding: 5px;
+  border: 1px solid black;
+  background-color: black;
+  color: white;
 }
