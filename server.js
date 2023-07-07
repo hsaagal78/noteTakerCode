@@ -5,7 +5,7 @@ const path = require ('path')
 
 const app = express();
 
-// app.use(express.static('public'));
+app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: false }));
 app.get('/public/css/style.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css');

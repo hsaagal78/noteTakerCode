@@ -1,51 +1,11 @@
 
-// function openPage() {
-//   const landingPage = document.getElementById("landingPage");
-//   const startNoteButton = document.getElementById("startNoteButton");
-//   const noteForm = document.getElementById("noteForm");
-      
-//       landingPage.style.display = "none";
-//       noteForm.style.display = "block";
-      
-//   };
-//   startNoteButton.addEventListener("click", openPage);
-
-
-  const noteReady=document.querySelector('.input');
   const saveButton = document.querySelector('#addNote');
-  saveButton.disabled = true;
   
-  noteReady.addEventListener('input', () => {
-    const noteText = noteReady.innerText.trim();
-    saveButton.disabled = noteText === ''; 
-  });
   
   saveButton.addEventListener('click', (event) => {
-    const noteText = noteReady.innerText.trim();
-    saveObj(noteText);
-  });
+    
   
-  function saveObj(noteText) {
-    const requestData = { text: noteText };
-    fetch('/notes/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestData),
-    })
-      .then(res => res.json())
-      .then(data => {
-        outputNotes();
-      })
-      .catch(err => {
-        console.error('Error updating note:', err);
-      });
-  }
-
-
-
-
+  });
 
 const outputE1 = document.querySelector('#saveNote');
 
