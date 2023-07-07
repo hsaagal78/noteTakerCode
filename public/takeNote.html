@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>takeNotes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="/public/css/jass.css">
    
 </head>
 <body>
+    <!-- <section id="landingPage">
+        <h1>Welcome to the Note Taker</h1>
+    <button id='startNoteButton' action="/notes" method='POST'>Start Take Note</button>
+    </section> -->
 
-    <form action="/notes" method='POST' class="container">
-        <button class="buttonPo custom-button">Note Taker <span class="plus-sign">+</span></button>
+    <form action="/notes" method='POST' class="container" id="noteForm" >
+        <button id='addNote' class="buttonPo custom-button">Note Taker <span class="plus-sign">+</span></button>
         <input name='note'type="text" class= input placeholder="Note Text"></input>
-
+        <button id="returnHome">home</button>
         <aside id="saveNote" class="contain updateNote">
             
     

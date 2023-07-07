@@ -5,7 +5,7 @@ const path = require ('path')
 
 const app = express();
 
-app.use(express.static('./public'));
+// app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.get('/public/css/style.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css');
@@ -14,6 +14,9 @@ app.get('/public/css/style.css', (req, res) => {
   app.get('/public/css/jass.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css');
     res.sendFile(path.join(__dirname, 'public', 'css', 'jass.css',));
+  });
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
 
 
@@ -47,12 +50,18 @@ app.delete('/notes/:id', (clientReq, serverRes) => {
 app.put('/notes/:id', (clientReq, serverRes) => {
   const noteId = clientReq.params.id;
   const updatedText = clientReq.body.text;
-  console.log('app',updatedText);
-  
-  const note = new Note();
-  note.id = noteId;
-  note.updateNote(updatedText,noteId);
-  serverRes.send({ message: 'Note updated successfully!' });
+
+  console.log('Request Body:', clientReq.body);
+
+  if (updatedText !== null && updatedText !== undefined) {
+    const note = new Note();
+    note.id = noteId;
+    note.updateNote(updatedText, noteId);
+    serverRes.send({ message: 'Note updated successfully!' });
+  } else {
+    console.error('Error updating note: Invalid data');
+    serverRes.status(400).send({ error: 'Invalid data' });
+  }
 });
 
 

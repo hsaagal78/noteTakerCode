@@ -1,3 +1,52 @@
+
+// function openPage() {
+//   const landingPage = document.getElementById("landingPage");
+//   const startNoteButton = document.getElementById("startNoteButton");
+//   const noteForm = document.getElementById("noteForm");
+      
+//       landingPage.style.display = "none";
+//       noteForm.style.display = "block";
+      
+//   };
+//   startNoteButton.addEventListener("click", openPage);
+
+
+  const noteReady=document.querySelector('.input');
+  const saveButton = document.querySelector('#addNote');
+  saveButton.disabled = true;
+  
+  noteReady.addEventListener('input', () => {
+    const noteText = noteReady.innerText.trim();
+    saveButton.disabled = noteText === ''; 
+  });
+  
+  saveButton.addEventListener('click', (event) => {
+    const noteText = noteReady.innerText.trim();
+    saveObj(noteText);
+  });
+  
+  function saveObj(noteText) {
+    const requestData = { text: noteText };
+    fetch('/notes/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData),
+    })
+      .then(res => res.json())
+      .then(data => {
+        outputNotes();
+      })
+      .catch(err => {
+        console.error('Error updating note:', err);
+      });
+  }
+
+
+
+
+
 const outputE1 = document.querySelector('#saveNote');
 
 function outputNotes() {
@@ -43,6 +92,7 @@ updateNoteContainer.addEventListener('click', (event) => {
 });
 
 function handleDeleteNote(noteId) {
+ 
   fetch(`/notes/${noteId}`, {
     method: 'DELETE'
   })
@@ -57,20 +107,24 @@ function handleDeleteNote(noteId) {
 }
 
 function handleUpdateNote(noteId) {
+  
   const noteToUpdate = document.querySelector(`[data-update-id="${noteId}"]`);
   const newnoteToUpdate = noteToUpdate.querySelector('.modal_body');
   const currentText = noteToUpdate.dataset.modalUpdateBody;
 
   const newText = window.prompt('Enter the new note text:', currentText);
- 
-  if (newText) {
-    
-      fetch(`/notes/${noteId}`, {
+
+  if (newText !== null && newText !== undefined) {
+    const requestData = {
+      text: newText
+    };
+
+    fetch(`/notes/${noteId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ text:newText })
+      body: JSON.stringify(requestData),
     })
       .then(res => res.json())
       .then(data => {
@@ -83,6 +137,14 @@ function handleUpdateNote(noteId) {
       });
   }
 }
+
+
+
+
+
+
+
+
 
 
 
