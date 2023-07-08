@@ -1,11 +1,21 @@
 
-  const saveButton = document.querySelector('#addNote');
-  
-  
-  saveButton.addEventListener('click', (event) => {
-    
-  
-  });
+document.querySelector('#addNote').addEventListener('click', (event) => {
+  event.preventDefault(); 
+
+  const noteInput = document.querySelector('.input');
+  const noteText = noteInput.value.trim();
+
+  if (noteText !== '') {
+    saveObj(noteText);
+    noteInput.value = ''; 
+
+    outputNotes(); 
+  } else {
+    console.error('Error: Note text is empty');
+  }
+});
+
+
 
 const outputE1 = document.querySelector('#saveNote');
 
@@ -44,10 +54,16 @@ deleteNoteContainer.addEventListener('click', (event) => {
 
 const updateNoteContainer = document.querySelector('.updateNote');
 updateNoteContainer.addEventListener('click', (event) => {
+  event.preventDefault(); 
   if (event.target.classList.contains('modalM_btn')) {
     const noteId = event.target.getAttribute('data-update-id');
+    if (noteId !== '') {
+      handleUpdateNote(noteId);
+      outputNotes(); 
+    } else {
+      console.error('Error: Note text is empty');
+    }
     
-    handleUpdateNote(noteId);
   }
 });
 
@@ -73,18 +89,13 @@ function handleUpdateNote(noteId) {
   const currentText = noteToUpdate.dataset.modalUpdateBody;
 
   const newText = window.prompt('Enter the new note text:', currentText);
-
-  if (newText !== null && newText !== undefined) {
-    const requestData = {
-      text: newText
-    };
-
+  
     fetch(`/notes/${noteId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(requestData),
+      body: JSON.stringify({text:newText}),
     })
       .then(res => res.json())
       .then(data => {
@@ -95,9 +106,28 @@ function handleUpdateNote(noteId) {
       .catch(err => {
         console.error('Error updating note:', err);
       });
-  }
+ 
 }
-
+function saveObj(noteText) {
+  const requestData = { text: noteText };
+  fetch('/notes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then(res => {
+      console.log(res); 
+      return res.json();
+    })
+    .then(data => {
+      outputNotes();
+    })
+    .catch(err => {
+      console.error('Error updating note:', err);
+    });
+}
 
 
 

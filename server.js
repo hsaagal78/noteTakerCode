@@ -4,9 +4,12 @@ const path = require ('path')
 
 
 const app = express();
+// const PORT = process.env.PORT || 3333;
+
+// app.listen(PORT, () => console.log('sever started in port %s',PORT));
 
 app.use(express.static('./public'));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json()); 
 app.get('/public/css/style.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css');
     res.sendFile(path.join(__dirname, 'public', 'css', 'style.css',));
@@ -20,23 +23,22 @@ app.get('/public/css/style.css', (req, res) => {
   });
 
 
-// Load Routes
+  app.get('/notes',(clientReq,serverRes) => {
+    const notes = getNotes();
+    serverRes.send(notes);
+  });
+  
 
 // Post route to retrieve the form data
 app.post('/notes', (clientReq, serverRes) => {
 
-  const newNote = new Note(clientReq.body.note);
-  // console.log(clientReq.body);
+  const newNote = new Note(clientReq.body.text);
+ 
   newNote.save();
-
-  // Respond back to the client to complete the request
+ 
   serverRes.redirect('/');
 });
-app.get('/notes',(clientReq,serverRes) => {
-  const notes = getNotes();
 
-  serverRes.send(notes);
-});
 
 app.delete('/notes/:id', (clientReq, serverRes) => {
   

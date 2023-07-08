@@ -93,10 +93,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 600px;
   margin: 50px;
   padding: 30px;
-  border: 1px solid black;
+  border: 1px solid #00BFFF;
 }
 #body h1{
   padding: 20px;
@@ -104,7 +104,7 @@
 }
 #body a{
   padding: 5px;
-  border: 1px solid black;
-  background-color: black;
+  
+  background-color: #00BFFF;
   color: white;
 }
