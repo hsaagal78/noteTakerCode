@@ -31,7 +31,7 @@ function outputNotes() {
             <div class="modal">
               <button class="modal_btn" data-note-id="${noteObj.id}">&times;</button>
               <h3 class="modal_body">${noteObj.text}</h3>
-              <h3 class="modal_id">${noteObj.id}</h3>
+              <h3 class="modal_id" style="color: white; font-size: 2px;">${noteObj.id}</h3>
               <button class="modalM_btn" data-update-id="${noteObj.id}" data-modal-update-body='${noteObj.text}'>&#9998;</button>
             </div>
           </div>
