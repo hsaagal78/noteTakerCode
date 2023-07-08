@@ -9,11 +9,11 @@ Clone the repository:
 
 git clone https://github.com/hsaagal78/noteTakerCode.git
 
-# Install the dependencies::
+# Install the dependencies:
 
-install express
-install uuid
-install fs
+- install express
+- install uuid
+- install fs
 
 # Start the server:
 
@@ -27,9 +27,9 @@ To delete a note, click the delete button (cross icon) next to the note. The not
 
 # Dependencies
 
-express: 4.17.1
-uuid: 8.3.2
-jass
+- express: 4.17.1
+- uuid: 8.3.2
+- jass
 
 ## Credit
 
