@@ -6,7 +6,7 @@
 
 Clone the repository:
 
-```bash
+
 git clone https://github.com/hsaagal78/noteTakerCode.git
 
 # Install the dependencies::
