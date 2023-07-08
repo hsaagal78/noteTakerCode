@@ -1,6 +1,6 @@
 # Note Taker Application
 
-    # This is a simple note-taking application built with JavaScript, Node.js, and Express.js. It allows users to create, update, and delete notes.
+ This is a simple note-taking application built with JavaScript, Node.js, and Express.js. It allows users to create, update, and delete notes.
 
 ## Installation
 
@@ -48,13 +48,13 @@ This project is licensed under the Apache 2.0 license.
 
 ## Screenshots
 Open Page
-![Screenshot](/lib/example/openPage.png.png)
+![Screenshot](/lib/example/openPage.png)
 
 Second Page
-![Screenshot](/lib/example/secondPage.png.png)
+![Screenshot](/lib/example/secondPage.png)
 
 Update Note
-![Screenshot](/lib/example/update.png.png)
+![Screenshot](/lib/example/update.png)
 
 
 ## Contributing
