@@ -4,9 +4,9 @@ const path = require ('path')
 
 
 const app = express();
-// const PORT = process.env.PORT || 3333;
+const PORT = process.env.PORT || 3333;
 
-// app.listen(PORT, () => console.log('sever started in port %s',PORT));
+app.listen(PORT, () => console.log('sever started in port %s',PORT));
 
 app.use(express.static('./public'));
 app.use(express.json()); 
@@ -55,15 +55,12 @@ app.put('/notes/:id', (clientReq, serverRes) => {
 
   console.log('Request Body:', clientReq.body);
 
-  if (updatedText !== null && updatedText !== undefined) {
+  
     const note = new Note();
     note.id = noteId;
     note.updateNote(updatedText, noteId);
     serverRes.send({ message: 'Note updated successfully!' });
-  } else {
-    console.error('Error updating note: Invalid data');
-    serverRes.status(400).send({ error: 'Invalid data' });
-  }
+  
 });
 
 

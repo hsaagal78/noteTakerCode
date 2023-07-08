@@ -1,14 +1,13 @@
 
 document.querySelector('#addNote').addEventListener('click', (event) => {
   event.preventDefault(); 
-
+  
   const noteInput = document.querySelector('.input');
   const noteText = noteInput.value.trim();
 
   if (noteText !== '') {
     saveObj(noteText);
     noteInput.value = ''; 
-
     outputNotes(); 
   } else {
     console.error('Error: Note text is empty');
@@ -89,13 +88,14 @@ function handleUpdateNote(noteId) {
   const currentText = noteToUpdate.dataset.modalUpdateBody;
 
   const newText = window.prompt('Enter the new note text:', currentText);
-  
+  const requestData = {text: newText};
     fetch(`/notes/${noteId}`, {
+      
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({text:newText}),
+      body: JSON.stringify(requestData),
     })
       .then(res => res.json())
       .then(data => {
@@ -109,7 +109,7 @@ function handleUpdateNote(noteId) {
  
 }
 function saveObj(noteText) {
-  const requestData = { text: noteText };
+  const requestData = {text: noteText};
   fetch('/notes', {
     method: 'POST',
     headers: {
