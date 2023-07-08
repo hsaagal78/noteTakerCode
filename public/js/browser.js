@@ -1,10 +1,9 @@
-
+//This code adds an event listener to the element with the ID addNote. It listens for a click event 
+//and prevents the default behavior of submitting a form
 document.querySelector('#addNote').addEventListener('click', (event) => {
   event.preventDefault(); 
-  
   const noteInput = document.querySelector('.input');
   const noteText = noteInput.value.trim();
-
   if (noteText !== '') {
     saveObj(noteText);
     noteInput.value = ''; 
@@ -13,11 +12,10 @@ document.querySelector('#addNote').addEventListener('click', (event) => {
     console.error('Error: Note text is empty');
   }
 });
-
-
-
+//This code defines the outputNotes() function, which is responsible 
+//for fetching notes data from the /notes endpoint.
+// and create new elements that needs.
 const outputE1 = document.querySelector('#saveNote');
-
 function outputNotes() {
   fetch('/notes')
     .then(res => res.json())
@@ -41,6 +39,8 @@ function outputNotes() {
 
 outputNotes();
 
+//This code adds an event listener to the element with the class contain, 
+//which represents the container for the notes.
 const deleteNoteContainer = document.querySelector('.contain');
 deleteNoteContainer.addEventListener('click', (event) => {
   if (event.target.classList.contains('modal_btn')) {
@@ -50,12 +50,13 @@ deleteNoteContainer.addEventListener('click', (event) => {
     handleDeleteNote(noteId);
   }
 });
-
+//This code adds an event listener to the element with the class updateNote, 
+//which represents the container for the update notes.
 const updateNoteContainer = document.querySelector('.updateNote');
 updateNoteContainer.addEventListener('click', (event) => {
-  event.preventDefault(); 
+     event.preventDefault(); 
   if (event.target.classList.contains('modalM_btn')) {
-    const noteId = event.target.getAttribute('data-update-id');
+     const noteId = event.target.getAttribute('data-update-id');
     if (noteId !== '') {
       handleUpdateNote(noteId);
       outputNotes(); 
@@ -65,9 +66,8 @@ updateNoteContainer.addEventListener('click', (event) => {
     
   }
 });
-
+// function to delete existing note and sending the messages as fetch request.
 function handleDeleteNote(noteId) {
- 
   fetch(`/notes/${noteId}`, {
     method: 'DELETE'
   })
@@ -80,17 +80,14 @@ function handleDeleteNote(noteId) {
       console.error('Error deleting note:', err);
     });
 }
-
+//function to update existing note and sending the new note as fetch request. 
 function handleUpdateNote(noteId) {
-  
   const noteToUpdate = document.querySelector(`[data-update-id="${noteId}"]`);
   const newnoteToUpdate = noteToUpdate.querySelector('.modal_body');
   const currentText = noteToUpdate.dataset.modalUpdateBody;
-
   const newText = window.prompt('Enter the new note text:', currentText);
   const requestData = {text: newText};
     fetch(`/notes/${noteId}`, {
-      
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -108,6 +105,7 @@ function handleUpdateNote(noteId) {
       });
  
 }
+//Function to save the new note and senting the note in fetch request. 
 function saveObj(noteText) {
   const requestData = {text: noteText};
   fetch('/notes', {

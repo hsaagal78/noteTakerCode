@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "ced8d0de-a86f-41db-bd66-61d4a6d0b0c8",
+    "text": "Fix the car"
+  },
+  {
+    "id": "9a34935f-894d-487d-b0e2-3fd0b3d4f508",
+    "text": "Buy dog food"
+  },
+  {
+    "id": "be17eda4-775d-4dc1-9984-986bc58d4f94",
+    "text": "Client lunch meeting"
+  },
+  {
+    "id": "4de48ec3-ff92-4dd6-ba3f-0be574e35b07",
+    "text": "Friday call sister"
+  },
+  {
+    "id": "241e4840-6132-4009-ad37-a5b91bae1bc8",
+    "text": "Finish payroll"
+  }
+]
